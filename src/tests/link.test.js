@@ -43,7 +43,7 @@ describe('Testing request', () => {
     expect(wrapper.html()).toContain(`<a class="card" href="test_link">
       <h2 class="tooltip">test_name
         <!--v-if-->
-      </h2><span><b>language:</b> js</span><span><b>stars:</b> 1</span><span><b>last modified:</b> 01/01/2022</span><span><b>description:</b> test</span>
+      </h2><span><b>language:</b> js</span><span><b>stars:</b> 1</span><span><b>last modified:</b> 01/01/2022</span><span class="tooltip"><b>description:</b> test <!--v-if--></span>
     </a>`)
   })
 })
