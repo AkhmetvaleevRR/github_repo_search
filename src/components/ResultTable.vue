@@ -16,7 +16,8 @@
           <span v-if="repository.language"><b>language:</b> {{repository.language}}</span>
           <span><b>stars:</b> {{repository.stargazers_count}}</span>
           <span v-if="repository.updated_at"><b>last modified:</b> {{formatDate(repository.updated_at)}}</span>
-          <span v-if="repository.description"><b>description:</b> {{repository.description}} </span>
+          <span class = "tooltip" v-if = "repository.description"><b>description:</b> {{truncateString(repository.description, 20)}}          
+            <span v-if="tooltip" class="tooltip-text tooltip-text_desc ">{{repository.description}}</span> </span>
         </a>
       </div>
       <div class="navigation">

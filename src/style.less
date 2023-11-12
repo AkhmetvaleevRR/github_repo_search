@@ -176,22 +176,29 @@ button:focus-visible {
   top: 30px;
   right: 0;
 }
+.tooltip {
+  position: relative;
+}
 .tooltip:hover .tooltip-text {
   visibility: visible;
 }
 
 .tooltip .tooltip-text {
   visibility: hidden;
-  width: max-content;
-  background-color: #444;
+  background-color: #363636;
   color: #fff;
   text-align: center;
   border-radius: 6px;
   padding: 5px 0;
   font-size: 14px;
   padding: 5px;
-  top: -10px;
-  right: -10px;
+  top: -20px;
+  right: 0;
   position: absolute;
+  width: inherit;
   z-index: 1;
+  &_desc {
+    top: 25px;
+    left: 10px;
+  }
 }
