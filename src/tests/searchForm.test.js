@@ -6,7 +6,6 @@ import { useStore } from '../store.js'
 
 test('SearchForm test', async () => {
   expect(SearchForm).toBeTruthy()
-  //mock store.loaded
   const wrapper = mount(SearchForm, {
     global: {
       plugins: [createTestingPinia()]

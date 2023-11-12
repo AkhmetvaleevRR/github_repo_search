@@ -10,8 +10,7 @@ export const useStore = defineStore('store', {
       page: ref(1),
       order: ref('desc'),
       loaded: ref(true),
-      query: ref({}),
-      needPage: ref(true) //Нужна ли загрузка
+      query: ref({})
     }
   },
   getters: {
@@ -30,20 +29,22 @@ export const useStore = defineStore('store', {
         const url = `https://api.github.com/search/repositories?q=${keyWords}&page=${page}&order=${order}&sort=updated`
         const request = new Request(url)
         if ('caches' in window) {
+          //если браузер поддерживает кэширование
           caches.open('my-cache').then((cache) => {
             cache
-              .match(url)
+              .match(url) //ищем в кэше наш запрос
               .then((res) => {
                 if (res) {
-                  res.json().then((x) => (this.response = x))
+                  res.json().then((x) => (this.response = x)) //записываем в переменную найденный в кэше запрос
                 } else {
+                  //если запроса нет в кэше
                   caches
                     .open('my-cache')
                     .then((cache) => {
                       fetch(request).then((res) => {
                         const res2 = res.clone()
                         cache
-                          .put(url, res)
+                          .put(url, res) //записываем запрос в кэш
                           .then(() => console.log(`${url} added to cache.`))
                           .then(() => res2.json().then((x) => (this.response = x)))
                           .catch((error) => console.error('Error adding data to cache:', error))
@@ -61,6 +62,7 @@ export const useStore = defineStore('store', {
           })
         } //сохраняем запрос если есть поддержка кэша
         else {
+          //если браузер не умеет в кэширование
           fetch(url, {
             headers: {
               Accept: 'application/json',

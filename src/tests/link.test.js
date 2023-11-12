@@ -1,37 +1,49 @@
-import { mount } from '@vue/test-utils'
-import ResultTable from '../components/ResultTable.vue'
-import { expect } from 'vitest'
+import { beforeEach, expect } from 'vitest'
 import { createTestingPinia } from '@pinia/testing'
 import { useStore } from '../store.js'
+import { shallowMount } from '@vue/test-utils'
+import ResultTable from '../components/ResultTable.vue'
+describe('Testing request', () => {
+  let wrapper = null
+  let store = null
+  beforeEach(() => {
+    wrapper = shallowMount(ResultTable, {
+      global: {
+        plugins: [
+          createTestingPinia({
+            initialState: {
+              store: {
+                response: {
+                  total_count: 17488,
+                  incomplete_results: false,
+                  items: [
+                    {
+                      id: 717503956,
+                      language: 'js',
+                      name: 'test_name',
+                      html_url: 'test_link',
+                      description: 'test',
+                      stargazers_count: 1,
+                      updated_at: '2022-01-01T00:00:00Z'
+                    }
+                  ]
+                }
+              }
+            }
+          })
+        ]
+      }
+    })
 
-test('link redirect test', async () => {
-  expect(ResultTable).toBeTruthy()
-
-  const wrapper = mount(ResultTable, {
-    global: {
-      plugins: [createTestingPinia()]
-    }
+    store = useStore()
   })
-  const store = useStore()
-  store.$patch({
-    response: {
-      total_count: 275,
-      items: [
-        {
-          id: 669121579,
-          name: 'test_repo',
-          html_url: 'its a test url',
-          description: 'testing data',
-          updated_at: '2023-07-21T11:50:05Z',
-          language: 'test_language',
-          score: 1.0,
-          length: 30
-        }
-      ]
-    }
+  it('validate request', () => {
+    store.getRepos('asd')
+    console.log(wrapper.html())
+    expect(wrapper.html()).toContain(`<a class="card" href="test_link">
+      <h2 class="tooltip">test_name
+        <!--v-if-->
+      </h2><span><b>language:</b> js</span><span><b>stars:</b> 1</span><span><b>last modified:</b> 01/01/2022</span><span><b>description:</b> test</span>
+    </a>`)
   })
-
-  console.log(store.response)
-  console.log(wrapper.html())
-  expect(wrapper.html()).toContain('<a class="card" href="its a test url">')
 })

@@ -1,6 +1,4 @@
-<template>  
-  <transition name="fade"
-                    mode="out-in">
+<template>
     <div class="result_repos" v-if ="store.response.total_count > 0">
       <h4>Result repos</h4>
       <small>Total: {{store.response.total_count}}</small>
@@ -16,7 +14,7 @@
             <span v-if="tooltip" class="tooltip-text">{{repository.name}}</span>  
           </h2>      
           <span v-if="repository.language"><b>language:</b> {{repository.language}}</span>
-          <span><b>score:</b> {{repository.score}}</span>
+          <span><b>stars:</b> {{repository.stargazers_count}}</span>
           <span v-if="repository.updated_at"><b>last modified:</b> {{formatDate(repository.updated_at)}}</span>
           <span v-if="repository.description"><b>description:</b> {{repository.description}} </span>
         </a>
@@ -33,7 +31,6 @@
           :class = "{ 'spinable': !store.loaded }"><span>next page</span></button>
       </div>
     </div>
-  </transition>
   <div v-if = "store.response.total_count == 0">Nothing found</div>
 </template>
 
@@ -54,15 +51,3 @@
     }
   }
 </script>
-
-<style>
-  .v-enter-from {
-    opacity: 0
-  }
-  .v-enter-to {
-    opacity: 1
-  }
-  .v-enter-active {
-    transition: opacity 2s ease
-  }
-</style>
