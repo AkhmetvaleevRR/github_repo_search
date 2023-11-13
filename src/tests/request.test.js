@@ -2,7 +2,7 @@ import { beforeEach, expect } from 'vitest'
 import { createTestingPinia } from '@pinia/testing'
 import { mount } from '@vue/test-utils'
 import ResultTable from '../components/ResultTable.vue'
-import { useStore } from '../store.js'
+import { useResponseStore } from '../store.js'
 describe('Testing request', () => {
   let wrapper = null
   let store = null
@@ -13,10 +13,9 @@ describe('Testing request', () => {
       }
     })
   })
-  it('validate request', () => {
-    store = useStore()
+  it('check function', () => {
+    store = useResponseStore()
     store.getRepos('asd')
-
     expect(store.getRepos).toHaveBeenCalledTimes(1)
     expect(store.getRepos).toHaveBeenLastCalledWith('asd')
   })

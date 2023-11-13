@@ -4,4 +4,5 @@
 2. npm ci
 3. npm run dev
 
-## For test - npm run test
+## For test
+npm run test

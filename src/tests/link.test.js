@@ -1,9 +1,9 @@
 import { beforeEach, expect } from 'vitest'
 import { createTestingPinia } from '@pinia/testing'
-import { useStore } from '../store.js'
+import { useResponseStore } from '../store.js'
 import { shallowMount } from '@vue/test-utils'
 import ResultTable from '../components/ResultTable.vue'
-describe('Testing request', () => {
+describe('Testing results', () => {
   let wrapper = null
   let store = null
   beforeEach(() => {
@@ -12,9 +12,9 @@ describe('Testing request', () => {
         plugins: [
           createTestingPinia({
             initialState: {
-              store: {
+              responseStore: {
                 response: {
-                  total_count: 17488,
+                  total_count: 310,
                   incomplete_results: false,
                   items: [
                     {
@@ -35,11 +35,17 @@ describe('Testing request', () => {
       }
     })
 
-    store = useStore()
+    store = useResponseStore()
   })
-  it('validate request', () => {
-    store.getRepos('asd')
-    console.log(wrapper.html())
+  it('card have link with provided test data', () => {
+    console.log(store.response)
+    expect(wrapper.html()).toContain(`<a class="card" href="test_link">
+      <h2 class="tooltip">test_name
+        <!--v-if-->
+      </h2><span><b>language:</b> js</span><span><b>stars:</b> 1</span><span><b>last modified:</b> 01/01/2022</span><span class="tooltip"><b>description:</b> test <!--v-if--></span>
+    </a>`)
+  })
+  it('card have link with provided test data', () => {
     expect(wrapper.html()).toContain(`<a class="card" href="test_link">
       <h2 class="tooltip">test_name
         <!--v-if-->

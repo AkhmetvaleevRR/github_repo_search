@@ -36,10 +36,10 @@
 </template>
 
 <script setup>
-  import { useStore } from '../store.js';
+  import { useResponseStore } from '../store.js';
   import { ref } from 'vue'
   const changeOrder = () => store.order === 'desc'? store.order = 'asc': store.order = 'desc'; //переключатель сортировки
-  let store = useStore(); //Обращение к стору
+  const store = useResponseStore(); //Обращение к стору
   let tooltip = ref(false) //Переменная для подсказок
   const formatDate = (s) => new Date(s).toLocaleDateString('en-GB')
   function truncateString (s, w) {  //функция для обрезания длинных названий
