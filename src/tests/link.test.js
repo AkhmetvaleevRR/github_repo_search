@@ -3,6 +3,8 @@ import { createTestingPinia } from '@pinia/testing'
 import { useResponseStore } from '../store.js'
 import { shallowMount } from '@vue/test-utils'
 import ResultTable from '../components/ResultTable.vue'
+import { describe, it } from 'vitest'
+
 describe('Testing results', () => {
   let wrapper = null
   let store = null

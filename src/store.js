@@ -42,7 +42,7 @@ export const useResponseStore = defineStore('responseStore', {
             try {
               const fetchedData = await fetch(url)
               const fetchedData2 = fetchedData.clone()
-              cashe.put(url, fetchedData)
+              cache.put(url, fetchedData)
 
               if (fetchedData) {
                 const respProm = await fetchedData2.json()

@@ -14,7 +14,6 @@
   </div>
 </template>
 
-
 <script setup>
   import { useResponseStore } from "../store.js"
   import { ref } from "vue"
@@ -22,6 +21,6 @@
   let emptyVal = ref(false)
   const query = ref("")
   function checkForm() {
-    query._value===''?this.emptyVal=true: this.emptyVal=false;    
+    query.value===''?this.emptyVal=true: this.emptyVal=false;    
   }
 </script>

@@ -35,11 +35,11 @@
   const formatDate = (s) => new Date(s).toLocaleDateString('en-GB')
   function truncateString (s, w) {  //функция для обрезания длинных названий
     if (s.length > w) {
-      tooltip = true;
+      tooltip.value = true;
       return s.slice(0, w).trim() + '...';
     }
     else {      
-      tooltip = false;
+      tooltip.value = false;
       return s;
     }
   }
