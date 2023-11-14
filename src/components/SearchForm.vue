@@ -6,11 +6,11 @@
     <button
       class="search_button"
       :class="{ spinable: !store.loaded }"
-      @click="checkForm();store.getRepos(query);"
+      @click="store.getRepos(query);"
     >
       <span>find repo </span>
     </button>
-    <span v-if="emptyVal">type something in the input above</span>
+    <span v-show="!query">type something in the input above</span>
     <span v-if="store.fetchError" class="danger">Something went wrong</span>
   </div>
 </template>
@@ -19,9 +19,5 @@
   import { useResponseStore } from "../store.js"
   import { ref } from "vue"
   const store = useResponseStore()
-  let emptyVal = ref(false)
   const query = ref("")
-  function checkForm() {
-    query.value===''?this.emptyVal=true: this.emptyVal=false;    
-  }
 </script>

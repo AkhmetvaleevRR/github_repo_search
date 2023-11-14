@@ -28,7 +28,7 @@
 <script setup>
   import { ref } from 'vue'  
   import { useResponseStore } from '../store.js';
-  import Navigation from './Navigation.vue';
+  import Navigation from './NavigationPanel.vue';
   const changeOrder = () => store.order === 'desc'? store.order = 'asc': store.order = 'desc'; //переключатель сортировки
   const store = useResponseStore(); //Обращение к стору
   let tooltip = ref(false) //Переменная для подсказок
