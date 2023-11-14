@@ -5,9 +5,10 @@ import ResultTable from '../components/ResultTable.vue'
 import { useResponseStore } from '../store.js'
 import { describe, it } from 'vitest'
 describe('Testing request', () => {
+  let wrapper = null
   let store = null
   beforeEach(() => {
-    const wrapper = mount(ResultTable, {
+    wrapper = mount(ResultTable, {
       global: {
         plugins: [createTestingPinia()]
       }

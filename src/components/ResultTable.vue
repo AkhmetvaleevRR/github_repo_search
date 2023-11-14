@@ -20,7 +20,7 @@
             <span v-if="tooltip" class="tooltip-text tooltip-text_desc ">{{repository.description}}</span> </span>
         </a>
       </div>
-      <Navigation/>
+      <NavigationPanel/>
     </div>
   <div v-if = "store.response.total_count === 0">Nothing found</div>
 </template>
@@ -28,7 +28,7 @@
 <script setup>
   import { ref } from 'vue'  
   import { useResponseStore } from '../store.js';
-  import Navigation from './NavigationPanel.vue';
+  import NavigationPanel from './NavigationPanel.vue';
   const changeOrder = () => store.order === 'desc'? store.order = 'asc': store.order = 'desc'; //переключатель сортировки
   const store = useResponseStore(); //Обращение к стору
   let tooltip = ref(false) //Переменная для подсказок
