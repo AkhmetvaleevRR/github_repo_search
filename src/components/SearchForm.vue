@@ -11,6 +11,7 @@
       <span>find repo </span>
     </button>
     <span v-if="emptyVal">type something in the input above</span>
+    <span v-if="store.fetchError" class="danger">Something went wrong</span>
   </div>
 </template>
 

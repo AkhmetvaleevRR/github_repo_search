@@ -10,7 +10,8 @@ export const useResponseStore = defineStore('responseStore', {
       page: ref(1),
       rorder: ref('desc'),
       loaded: ref(true),
-      query: ref({})
+      query: ref({}),
+      fetchError: ref(false)
     }
   },
   getters: {
@@ -50,6 +51,9 @@ export const useResponseStore = defineStore('responseStore', {
               }
             } catch (error) {
               console.error('Error adding data to cache:', error)
+              if (error.message.includes('Failed to fetch')) {
+                this.fetchError = true
+              }
             } finally {
               this.loaded = true //Переменная для окончания загрузки
             }
@@ -65,7 +69,11 @@ export const useResponseStore = defineStore('responseStore', {
             method: 'GET'
           })
             .then((res) => res.json().then((x) => (this.response = x))) //преобразуем ответ в json и сохраняем в переменную
-            .catch((error) => console.log(error)) //отлавливаем ошибки и выводим в консоль
+            .catch((error) =>
+              error.message.includes('Failed to fetch')
+                ? (this.fetchError = true)
+                : console.log(error)
+            ) //отлавливаем ошибки и выводим в консоль
             .finally(() => {
               this.loaded = true //Переменная для окончания загрузки
             })

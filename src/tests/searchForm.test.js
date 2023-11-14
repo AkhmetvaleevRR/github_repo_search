@@ -3,6 +3,7 @@ import SearchForm from '../components/SearchForm.vue'
 import { expect } from 'vitest'
 import { createTestingPinia } from '@pinia/testing'
 import { useResponseStore } from '../store.js'
+import { describe, beforeEach, it } from 'vitest'
 
 describe('Searchform test', () => {
   let wrapper = null
