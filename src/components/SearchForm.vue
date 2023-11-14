@@ -22,6 +22,6 @@
   let emptyVal = ref(false)
   const query = ref("")
   function checkForm() {
-    query._value==''?this.emptyVal=true: this.emptyVal=false;    
+    query._value===''?this.emptyVal=true: this.emptyVal=false;    
   }
 </script>

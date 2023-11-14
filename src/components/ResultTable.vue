@@ -5,7 +5,7 @@
       <small> on page: {{store.response.items.length}}</small>
       <button class="sort_order_button" @click="changeOrder(); store.getRepos(store.keyWords, store.page, store.order); ">sort by updated: {{store.order}}</button>
       <hr>
-      <div id="list_of_repos" >
+      <div class="list_of_repos" >
         <a class="card" v-for="repository in store.response.items" 
           :key="repository.id" 
           :href="repository.html_url">
@@ -20,24 +20,15 @@
             <span v-if="tooltip" class="tooltip-text tooltip-text_desc ">{{repository.description}}</span> </span>
         </a>
       </div>
-      <div class="navigation">
-        <button  v-if = "store.response.items.length > 0 " class="page-" 
-          @click="store.getRepos(store.keyWords, store.page-(1))"        
-          :disabled = "store.page <= 1"
-          :class = "{ 'spinable': !store.loaded}"><span>prev page</span></button>   
-          <span class="page_counter">{{store.page}}</span>     
-        <button  v-if = "store.response.items.length > 0" class="page+" 
-          @click="store.getRepos(store.keyWords, store.page+(1))"            
-          :disabled = "store.page == store.pageCounter"  
-          :class = "{ 'spinable': !store.loaded }"><span>next page</span></button>
-      </div>
+      <Navigation/>
     </div>
-  <div v-if = "store.response.total_count == 0">Nothing found</div>
+  <div v-if = "store.response.total_count === 0">Nothing found</div>
 </template>
 
 <script setup>
+  import { ref } from 'vue'  
   import { useResponseStore } from '../store.js';
-  import { ref } from 'vue'
+  import Navigation from './Navigation.vue';
   const changeOrder = () => store.order === 'desc'? store.order = 'asc': store.order = 'desc'; //переключатель сортировки
   const store = useResponseStore(); //Обращение к стору
   let tooltip = ref(false) //Переменная для подсказок
@@ -45,8 +36,9 @@
   function truncateString (s, w) {  //функция для обрезания длинных названий
     if (s.length > w) {
       tooltip = true;
-      return s.slice(0, w).trim() + '...'
-    }else {      
+      return s.slice(0, w).trim() + '...';
+    }
+    else {      
       tooltip = false;
       return s;
     }
